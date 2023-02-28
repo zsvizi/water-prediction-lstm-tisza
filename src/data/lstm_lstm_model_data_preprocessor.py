@@ -13,17 +13,13 @@ from src.data.downloader import Downloader
 
 
 class LSTMLSTMModelDataPreprocessor:
-    def __int__(self):
-        pass
-
-    @staticmethod
-    def get_model_files(model_name: str):
+    def __init__(self):
+        model_name = "t19"
         Downloader(file_url="https://drive.google.com/uc?export=download&id=1MnTYl60N6sGnD0AMeqcrBOHigEKjEIkp",
-                   file_name="t19.json")
-        data = json.load(open(os.path.join(PROJECT_PATH, "data", "t19.json")))
-
-        Downloader(file_url=data[model_name]["hparams"], file_name="hparams_" + model_name + ".yaml")
-        Downloader(file_url=data[model_name]["parameter"], file_name="parameter_file_" + model_name)
+                   file_name=model_name + ".json")
+        model_files = json.load(open(os.path.join(PROJECT_PATH, "data", model_name + ".json")))
+        Downloader(file_url=model_files[model_name]["hparams"], file_name="hparams_" + model_name + ".yaml")
+        Downloader(file_url=model_files[model_name]["parameter"], file_name="parameter_file_" + model_name)
 
     @staticmethod
     def get_dataloaders(data, scalers, train, max_encoder_length, max_prediction_length, features, batch_size,
