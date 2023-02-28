@@ -40,9 +40,6 @@ class LSTMLSTMModelDataPreprocessor:
     @staticmethod
     def preprocess_data(df: pd.DataFrame, start_date: str, end_date: str, hyperparameters: dict):
         hp = hyperparameters
-        # Downloader(file_url="https://drive.google.com/uc?export=download&id=1MXUseGykD-Tf1cAJ9Ipp-vYJISNwyCy3",
-        #            file_name="data_2004-2020.csv")
-        # df = pd.read_csv(os.path.join(PROJECT_PATH, "data", "data_2004-2020.csv"), index_col=0)
         df.columns = df.columns.astype(str)
         dm = DataPreprocessor(df)
 
