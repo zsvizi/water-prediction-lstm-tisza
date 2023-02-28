@@ -5,7 +5,7 @@ import pandas as pd
 from src.evaluation.evaluation_base import EvaluationBase
 
 
-class Evaluate(EvaluationBase):
+class Evaluator(EvaluationBase):
     def __init__(self, validation_df: pd.DataFrame = None, prediction_df: pd.DataFrame = None):
 
         super().__init__()
