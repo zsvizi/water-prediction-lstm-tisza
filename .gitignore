@@ -1,0 +1,8 @@
+venv/
+plots/
+.idea/
+*.ipynb_checkpoints
+*.ipynb
+*.csv
+*.json
+data/generated
