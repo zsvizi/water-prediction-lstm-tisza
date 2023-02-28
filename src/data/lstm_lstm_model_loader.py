@@ -29,7 +29,3 @@ class LSTMLSTMModelLoader:
                                      Loader=yaml.Loader)
         self.model = LSTMSequenceModel(**self.p_yaml_dict)
         self.__load_hyperparameters()
-
-
-
-
