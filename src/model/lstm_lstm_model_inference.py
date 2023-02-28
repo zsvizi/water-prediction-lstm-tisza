@@ -1,11 +1,8 @@
 import datetime
-import os
 
 import numpy as np
 import pandas as pd
 
-from src import PROJECT_PATH
-from src.data.downloader import Downloader
 from src.data.data_preprocessor import DataPreprocessor
 from src.data.lstm_lstm_model_data_preprocessor import LSTMLSTMModelDataPreprocessor
 
@@ -16,7 +13,7 @@ class LSTMLSTMModelInference:
         self.p_yaml_dict = p_yaml_dict
         self.hyperparameters = hyperparameters
 
-    def get_prediction(self, start_date, end_date):
+    def get_prediction(self, df: pd.DataFrame, start_date: str, end_date: str):
 
         hp = self.hyperparameters
 
@@ -26,14 +23,15 @@ class LSTMLSTMModelInference:
         conf_start = datetime.datetime.strftime(datetime.datetime.strptime(start_date, '%Y-%m-%d') -
                                                 datetime.timedelta(days=conf_calc_window), '%Y-%m-%d')
 
-        Downloader(file_url="https://drive.google.com/uc?export=download&id=1MXUseGykD-Tf1cAJ9Ipp-vYJISNwyCy3",
-                   file_name="data_2004-2020.csv")
-        df = pd.read_csv(os.path.join(PROJECT_PATH, "data", "data_2004-2020.csv"), index_col=0)
+        # Downloader(file_url="https://drive.google.com/uc?export=download&id=1MXUseGykD-Tf1cAJ9Ipp-vYJISNwyCy3",
+        #            file_name="data_2004-2020.csv")
+        # df = pd.read_csv(os.path.join(PROJECT_PATH, "data", "data_2004-2020.csv"), index_col=0)
         df.columns = df.columns.astype(str)
         dm = DataPreprocessor(df)
 
         _, d_val_dataloader_conf = LSTMLSTMModelDataPreprocessor.get_dataloaders(
-            data=LSTMLSTMModelDataPreprocessor.load_data(start_date=conf_start, end_date=end_date, hyperparameters=hp),
+            data=LSTMLSTMModelDataPreprocessor.preprocess_data(
+                df=df, start_date=conf_start, end_date=end_date, hyperparameters=hp),
             train=False, scalers=hp["scalers"],
             max_encoder_length=hp["max_encoder_length"],
             max_prediction_length=pred_length,

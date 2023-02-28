@@ -18,9 +18,9 @@ class LSTMLSTMModelDataPreprocessor:
 
     @staticmethod
     def get_model_files(model_name: str):
-        Downloader(file_url="https://drive.google.com/uc?export=download&id=1JqH05bnS9Q2RM2MGzTPf2obDIaX9eM3J",
-                   file_name="modellek.json")
-        data = json.load(open(os.path.join(PROJECT_PATH, "data", "modellek.json")))
+        Downloader(file_url="https://drive.google.com/uc?export=download&id=1MnTYl60N6sGnD0AMeqcrBOHigEKjEIkp",
+                   file_name="t19.json")
+        data = json.load(open(os.path.join(PROJECT_PATH, "data", "t19.json")))
 
         Downloader(file_url=data[model_name]["hparams"], file_name="hparams_" + model_name + ".yaml")
         Downloader(file_url=data[model_name]["parameter"], file_name="parameter_file_" + model_name)
@@ -38,11 +38,11 @@ class LSTMLSTMModelDataPreprocessor:
         return dataset, dataloader
 
     @staticmethod
-    def load_data(start_date, end_date, hyperparameters):
+    def preprocess_data(df: pd.DataFrame, start_date: str, end_date: str, hyperparameters: dict):
         hp = hyperparameters
-        Downloader(file_url="https://drive.google.com/uc?export=download&id=1MXUseGykD-Tf1cAJ9Ipp-vYJISNwyCy3",
-                   file_name="data_2004-2020.csv")
-        df = pd.read_csv(os.path.join(PROJECT_PATH, "data", "data_2004-2020.csv"), index_col=0)
+        # Downloader(file_url="https://drive.google.com/uc?export=download&id=1MXUseGykD-Tf1cAJ9Ipp-vYJISNwyCy3",
+        #            file_name="data_2004-2020.csv")
+        # df = pd.read_csv(os.path.join(PROJECT_PATH, "data", "data_2004-2020.csv"), index_col=0)
         df.columns = df.columns.astype(str)
         dm = DataPreprocessor(df)
 
