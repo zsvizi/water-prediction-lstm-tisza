@@ -1,6 +1,7 @@
 import datetime
 import json
 import os
+from typing import Any, Tuple
 
 import numpy as np
 import pandas as pd
@@ -13,17 +14,21 @@ from src.data.downloader import Downloader
 
 
 class LSTMLSTMModelDataPreprocessor:
+    """
+    A class to manage data manipulations for the LSTM-LSTM model.
+    """
     def __init__(self):
         model_name = "t19"
-        Downloader(file_url="https://drive.google.com/uc?export=download&id=1MnTYl60N6sGnD0AMeqcrBOHigEKjEIkp",
+        Downloader(gdrive_id="1MnTYl60N6sGnD0AMeqcrBOHigEKjEIkp",
                    file_name=model_name + ".json")
         model_files = json.load(open(os.path.join(PROJECT_PATH, "data", model_name + ".json")))
-        Downloader(file_url=model_files[model_name]["hparams"], file_name="hparams_" + model_name + ".yaml")
-        Downloader(file_url=model_files[model_name]["parameter"], file_name="parameter_file_" + model_name)
+        Downloader(gdrive_id=model_files[model_name]["hparams"], file_name="hparams_" + model_name + ".yaml")
+        Downloader(gdrive_id=model_files[model_name]["parameter"], file_name="parameter_file_" + model_name)
 
     @staticmethod
     def get_dataloaders(data, scalers, train, max_encoder_length, max_prediction_length, features, batch_size,
-                        target_normalizer=EncoderNormalizer(), num_workers: int = 0, target: str = None):
+                        target_normalizer=EncoderNormalizer(),
+                        num_workers: int = 0, target: str = None) -> Tuple[Any, Any]:
         dataset = TimeSeriesDataSet(data, time_idx="time_idx", target=target, group_ids=["group_id"],
                                     min_encoder_length=max_encoder_length, max_encoder_length=max_encoder_length,
                                     min_prediction_length=max_prediction_length,
@@ -35,6 +40,14 @@ class LSTMLSTMModelDataPreprocessor:
 
     @staticmethod
     def preprocess_data(df: pd.DataFrame, start_date: str, end_date: str, hyperparameters: dict):
+        """
+        This method preprocesses the data.
+        :param pd.DataFrame df: the data that will be preprocessed
+        :param start_date: start date of the appropriate time interval (included)
+        :param end_date: end date of the appropriate time interval (included)
+        :param dict hyperparameters: hyperparameters of the data
+        :return pd.DataFrame result: the preprocessed data
+        """
         hp = hyperparameters
         df.columns = df.columns.astype(str)
         dm = DataPreprocessor(df)
@@ -54,7 +67,16 @@ class LSTMLSTMModelDataPreprocessor:
         return result
 
     @staticmethod
-    def extend_df_for_predictions_after_last_days(data, end_date_temp, last_date, result):
+    def extend_df_for_predictions_after_last_days(data: pd.DataFrame, end_date_temp, last_date,
+                                                  result: pd.DataFrame) -> pd.DataFrame:
+        """
+        This method extends the data for predictions after last days.
+        :param pd.DataFrame data: the data that will be extended
+        :param end_date_temp: the temporary end date
+        :param last_date: the last date
+        :param pd.DataFrame result: the data that will be extended
+        :return pd.DataFrame result: the extended dataframe
+        """
         # add last date to the filtered data (since it does not contain)
         to_append = pd.DataFrame(
             data=np.hstack((

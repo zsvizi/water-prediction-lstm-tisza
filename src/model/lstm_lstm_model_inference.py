@@ -8,13 +8,25 @@ from src.data.lstm_lstm_model_data_preprocessor import LSTMLSTMModelDataPreproce
 
 
 class LSTMLSTMModelInference:
-    def __init__(self, model, p_yaml_dict: dict, hyperparameters):
+    def __init__(self, model, p_yaml_dict: dict, hyperparameters: dict):
+        """
+        The LSTM-LSTM model inference class.
+        :param model: the model
+        :param dict p_yaml_dict: the yaml dict.
+        :param dict hyperparameters: hyperparameters of the model
+        """
         self.model = model
         self.p_yaml_dict = p_yaml_dict
         self.hyperparameters = hyperparameters
 
-    def get_prediction(self, df: pd.DataFrame, start_date: str, end_date: str):
-
+    def get_prediction(self, df: pd.DataFrame, start_date: str, end_date: str) -> pd.DataFrame:
+        """
+        This method predicts data with LSTM-LSTM model.
+        :param pd.DataFrame df: the dataframe, that will be predicted
+        :param str start_date: start date of the appropriate time interval (included)
+        :param str end_date: end date of the appropriate time interval (included)
+        :return pd.DataFrame df_result: the predicted data
+        """
         hp = self.hyperparameters
 
         pred_length = hp['max_prediction_length']

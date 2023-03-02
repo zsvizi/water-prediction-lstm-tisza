@@ -1,8 +1,8 @@
 from abc import ABC
+from typing import Dict, List
 
 from pytorch_forecasting.models.base_model import AutoRegressiveBaseModelWithCovariates
 from pytorch_forecasting.models.nn import LSTM
-from typing import Dict, List
 import torch
 
 

@@ -3,21 +3,20 @@ import pandas as pd
 
 class DataPreprocessor:
     """
-    A class to manage data manipulations
+    A class to manage data manipulations.
     """
     def __init__(self, dataframe: pd.DataFrame):
         """
-        :param dataframe: The index of the input dataframe has to be DateTimeIndex
+        :param pd.DataFrame dataframe: the index of the input dataframe has to be DateTimeIndex
         """
         self.data = dataframe
 
     @staticmethod
     def add_forecasting_columns(data: pd.DataFrame) -> pd.DataFrame:
         """
-        Add extra columns to the input dataframe, that are required by the PyTorchForecasting framework
-
-        :param data: pandas dataframe, whose index is a datetime index
-        :return: a new dataframe with additional columns:
+        Add extra columns to the input dataframe, that are required by the PyTorchForecasting framework.
+        :param pd.DataFrame data: pandas dataframe, whose index is a datetime index
+        :return pd.DataFrame df: a new dataframe with additional columns:
             - group_id: ID, that corresponds to the time series
             - time_idx: ID of the element, in the corresponding time series
             - day: number of the day in the year
@@ -34,7 +33,7 @@ class DataPreprocessor:
 
     def filter_by_dates(self, start_date, end_date) -> pd.DataFrame:
         """
-        Select
+        Creates a dataframe that is filtered and additional columns are added.
         :param start_date: start date of the appropriate time interval (included)
         :param end_date: end date of the appropriate time interval (included)
         :return: pd.DataFrame a new pandas dataframe that is filtered and additional columns are added

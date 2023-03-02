@@ -7,19 +7,28 @@ from src.evaluation.evaluation_base import EvaluationBase
 
 class Evaluator(EvaluationBase):
     def __init__(self, validation_df: pd.DataFrame = None, prediction_df: pd.DataFrame = None):
+        """
+        This class calculates statistic.
+        :param pd.DataFrame validation_df: the validation data
+        :param pd.DataFrame prediction_df: the predicted data
+        """
 
         super().__init__()
         self.validation_df = validation_df
         self.prediction_df = prediction_df
         self.error_df = self.prediction_df - self.validation_df
 
-    def calculate_all_stats(self, observed=None, modeled=None):
+    def calculate_all_stats(self, observed: pd.Series = None, modeled: pd.Series = None) -> pd.DataFrame:
+        """
+        Calculates all methods, that are in the EvaluationBase class.
+        :param pd.Series observed: The observed data. (validation)
+        :param pd.Series modeled: The modeled data. (prediction)
+        :return pd.DataFrame: the calculated statistic dataframe
+        """
         if observed is None:
             observed = self.validation_df
         if modeled is None:
             modeled = self.prediction_df
-
-        # calc_list = [rmse, mae, r2, nse, wi, mape, rmae, mse, rrmse, rmsre, nnse, anse, nanse, fc, lm, nwi, corr]
 
         stats = pd.DataFrame()
         stats["rmse"] = self.rmse(observed, modeled)
