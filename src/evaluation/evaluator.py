@@ -23,7 +23,7 @@ class Evaluator(EvaluationBase):
         Calculates all methods, that are in the EvaluationBase class.
         :param pd.Series observed: The observed data. (validation)
         :param pd.Series modeled: The modeled data. (prediction)
-        :return pd.DataFrame: the calculated statistic dataframe
+        :return pd.DataFrame stats: the calculated statistic dataframe
         """
         if observed is None:
             observed = self.validation_df
