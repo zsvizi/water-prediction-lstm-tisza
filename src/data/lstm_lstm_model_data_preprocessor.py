@@ -26,9 +26,13 @@ class LSTMLSTMModelDataPreprocessor:
         Downloader(gdrive_id=model_files[model_name]["parameter"], file_name="parameter_file_" + model_name)
 
     @staticmethod
-    def get_dataloaders(data, scalers, train, max_encoder_length, max_prediction_length, features, batch_size,
+    def get_dataloaders(data: pd.DataFrame, scalers: dict, train: bool, max_encoder_length: int,
+                        max_prediction_length: int, features: list, batch_size: int,
                         target_normalizer=EncoderNormalizer(),
                         num_workers: int = 0, target: str = None) -> Tuple[Any, Any]:
+        """
+        This method loads the dataset and gets the dataloader.
+        """
         dataset = TimeSeriesDataSet(data, time_idx="time_idx", target=target, group_ids=["group_id"],
                                     min_encoder_length=max_encoder_length, max_encoder_length=max_encoder_length,
                                     min_prediction_length=max_prediction_length,
