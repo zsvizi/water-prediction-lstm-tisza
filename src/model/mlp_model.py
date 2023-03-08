@@ -9,7 +9,9 @@ class MLPModel(nn.Module):
         self.model = nn.Sequential(
             nn.Flatten(),
             nn.Linear(in_features=past_window * n_features, out_features=hidden_size_1),
+            nn.ReLU(),
             nn.Linear(in_features=hidden_size_1, out_features=hidden_size_2),
+            nn.ReLU(),
             nn.Linear(in_features=hidden_size_2, out_features=horizon)
         )
 
