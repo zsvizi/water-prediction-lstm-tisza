@@ -9,6 +9,5 @@ class BaselineModel(nn.Module):
         self.target_idx = target_idx
 
     def forward(self, x: torch.tensor):
-        batch_size, _, _ = x.shape
         vals = x[:, -1, self.target_idx]
-        return vals.tile((batch_size, self.horizon))
+        return vals.tile(self.horizon).reshape(self.horizon, -1).T
