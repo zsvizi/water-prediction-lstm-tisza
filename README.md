@@ -10,7 +10,7 @@ by Zsolt Vizi, Bálint Batki, Luca Rátki, Szabolcs Szalánczi, István Fehérv�
 The source code for this project is implemented in Python.
 The codes for calculations are included in the `src` folder and the plotting is written in Jupyter notebook.
 
-You can download the Jupyter notebook (`all_analysis_for_paper.ipynb`) for reproducing plots in the paper from
+You can download the Jupyter notebook `all_analysis_for_paper.ipynb` for reproducing plots in the paper from
 [here](https://drive.google.com/drive/folders/1YHXWRqf8B82foeRUnhrgyxxu3-y8boY-?usp=sharing). 
 In this folder, you can find the data used for the visualization and the statistical analysis, 
 but the code in the notebook downloads them automatically in the folder `data`.
@@ -33,3 +33,8 @@ The repository contains the following folders:
 
 The files containing trained weights for the models can be found in the above mentioned 
 Google Drive folder.
+
+## Testing models
+
+You can download the Jupyter notebook `test_models.ipynb` from the Google Drive folder and 
+put into the `notebooks` folder to test the models implemented for this project.

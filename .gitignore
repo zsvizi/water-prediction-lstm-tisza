@@ -6,3 +6,5 @@ plots/
 *.csv
 *.json
 data/generated
+*.pth
+*.pickle
