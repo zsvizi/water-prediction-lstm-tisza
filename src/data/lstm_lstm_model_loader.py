@@ -15,6 +15,9 @@ class LSTMLSTMModelLoader:
         self.hyperparameters = None
 
     def __load_hyperparameters(self):
+        """
+        Loads the hyperparameters.
+        """
         self.hyperparameters = {
             "selected_gauges": self.p_yaml_dict['time_varying_reals_encoder'],
             "features": self.p_yaml_dict['time_varying_reals_encoder'],
