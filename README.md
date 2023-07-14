@@ -4,6 +4,10 @@ This repository contains code for the paper
 _Water level prediction with various machine learning algorithms for a lowland river_ 
 by Zsolt Vizi, Bálint Batki, Luca Rátki, Szabolcs Szalánczi, István Fehérváry, Péter Kozák and Tímea Kiss.
 
+## Validation data
+
+The validation data used for the analysis is located 
+[here](https://drive.google.com/drive/folders/13Yx92tQHIOoHsvsSkcQMorR2xociBvVe?usp=sharing).
 
 ## Environment
 
