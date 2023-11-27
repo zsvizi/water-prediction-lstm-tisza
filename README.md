@@ -1,10 +1,10 @@
-# Water level prediction with various machine learning algorithms for a lowland river
+# Water level prediction using long short-term memory neural network model for a lowland river: a case study on the Tisza River, Central Europe
 
 This repository contains code for the paper 
 _Water level prediction with various machine learning algorithms for a lowland river_ 
 by Zsolt Vizi, Bálint Batki, Luca Rátki, Szabolcs Szalánczi, István Fehérváry, Péter Kozák and Tímea Kiss.
-You can find the manuscript of this paper 
-[here](https://docs.google.com/document/d/1IpxT-_Cj9r8Mi56GJRTuxB76t6dYU35a/edit?usp=sharing&ouid=114346696523564569970&rtpof=true&sd=true).
+You can find the published paper
+[here](https://enveurope.springeropen.com/articles/10.1186/s12302-023-00796-3).
 
 ## Validation data
 
